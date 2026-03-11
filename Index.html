@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>George Skhirtladze // Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg:        #0a0305;
+    --bg2:       #0f0408;
+    --bg3:       #140608;
+    --red:       #c0152a;
+    --red-bright:#e8192f;
+    --red-dim:   #7a0d1a;
+    --red-faint: rgba(192,21,42,0.07);
+    --gold:      #c9943a;
+    --gold-dim:  #8a6020;
+    --bone:      #e8dcc8;
+    --bone-dim:  #9a8f7e;
+    --bone-faint:rgba(232,220,200,0.06);
+    --border:    rgba(192,21,42,0.25);
+    --border-gold: rgba(201,148,58,0.3);
+    --display:   'Cinzel', serif;
+    --body:      'Crimson Pro', serif;
+    --mono:      'Share Tech Mono', monospace;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--bone-dim);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content:'';
+    position:fixed;
+    inset:0;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%);
+    pointer-events:none;
+    z-index:9998;
+  }
+
+  .drip-border {
+    position:fixed;
+    top:0; left:0; right:0;
+    height:3px;
+    background: linear-gradient(90deg, transparent, var(--red-dim), var(--red), var(--red-dim), transparent);
+    z-index:200;
+    box-shadow: 0 0 20px rgba(192,21,42,0.6);
+  }
+
+  nav {
+    position:fixed;
+    top:3px; left:0; right:0;
+    z-index:100;
+    background: rgba(10,3,5,0.93);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+    height:58px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+  .nav-logo {
+    font-family: var(--display);
+    font-size: 15px;
+    color: var(--gold);
+    letter-spacing: 4px;
+    font-weight: 600;
+  }
+
+  .nav-sigil { color: var(--red); margin: 0 8px; font-size: 18px; }
+
+  .nav-links { display:flex; gap:36px; }
+  .nav-links a {
+    font-family: var(--display);
+    font-size: 10px;
+    color: var(--bone-dim);
+    text-decoration:none;
+    letter-spacing:3px;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--red-bright); }
+
+  #hero {
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding: 100px 10vw 80px;
+    overflow:hidden;
+  }
+
+  .rune-circle {
+    position:absolute;
+    right: -5vw; top: 50%;
+    transform: translateY(-50%);
+    width: 55vw; max-width: 700px;
+    aspect-ratio:1;
+    opacity:0.04;
+    pointer-events:none;
+  }
+  .rune-circle svg { width:100%; height:100%; animation: slowspin 60s linear infinite; }
+  @keyframes slowspin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+  .hero-content { position:relative; z-index:1; max-width:680px; }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--red-dim);
+    letter-spacing:4px;
+    margin-bottom:20px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .hero-eyebrow::before {
+    content:'';
+    display:inline-block;
+    width:32px; height:1px;
+    background: var(--red-dim);
+  }
+
+  .hero-name {
+    font-family: var(--display);
+    font-size: clamp(44px, 7vw, 88px);
+    color: var(--bone);
+    line-height: 0.95;
+    letter-spacing: 6px;
+    font-weight: 900;
+    margin-bottom: 6px;
+  }
+
+  .hero-name-accent {
+    font-family: var(--display);
+    font-size: clamp(44px, 7vw, 88px);
+    color: var(--red);
+    line-height: 0.95;
+    letter-spacing: 6px;
+    font-weight: 900;
+    text-shadow: 0 0 60px rgba(192,21,42,0.5), 0 0 120px rgba(192,21,42,0.2);
+    display:block;
+    margin-bottom:28px;
+    animation: candleflicker 4s ease-in-out infinite;
+  }
+
+  @keyframes candleflicker {
+    0%,100%{opacity:1} 20%{opacity:0.97} 40%{opacity:0.99} 60%{opacity:0.95} 80%{opacity:0.98}
+  }
+
+  .hero-title {
+    font-family: var(--display);
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 5px;
+    font-weight:400;
+    margin-bottom:32px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+  }
+  .hero-title::after {
+    content:'';
+    flex:1; max-width:120px; height:1px;
+    background: linear-gradient(to right, var(--gold-dim), transparent);
+  }
+
+  .hero-desc {
+    font-size: 18px;
+    color: var(--bone-dim);
+    line-height: 1.8;
+    max-width: 520px;
+    margin-bottom: 40px;
+    font-weight:300;
+    font-style: italic;
+  }
+  .hero-desc strong { color: var(--bone); font-style:normal; font-weight:600; }
+
+  .hero-tags { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:44px; }
+  .tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--bone-dim);
+    border: 1px solid rgba(232,220,200,0.12);
+    background: var(--bone-faint);
+    padding: 4px 14px;
+    letter-spacing:2px;
+    transition: all 0.3s;
+  }
+  .tag:hover { color:var(--red-bright); border-color:var(--red-dim); }
+
+  .hero-btns { display:flex; gap:16px; flex-wrap:wrap; }
+
+  .btn {
+    font-family: var(--display);
+    font-size: 11px;
+    letter-spacing: 3px;
+    padding: 14px 32px;
+    text-decoration:none;
+    transition: all 0.3s;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-weight:600;
+  }
+  .btn-primary { background: var(--red); color: var(--bone); border: 1px solid var(--red); }
+  .btn-primary:hover { background: transparent; color: var(--red-bright); box-shadow: 0 0 30px rgba(192,21,42,0.3); }
+  .btn-secondary { background: transparent; color: var(--bone-dim); border: 1px solid var(--border-gold); }
+  .btn-secondary:hover { color: var(--gold); border-color: var(--gold); box-shadow: 0 0 20px rgba(201,148,58,0.15); }
+
+  .divider {
+    display:flex; align-items:center; gap:20px;
+    padding: 0 10vw; opacity:0.4;
+  }
+  .divider-line { flex:1; height:1px; background: linear-gradient(to right, transparent, var(--red-dim), transparent); }
+  .divider-sigil { color:var(--red); font-size:20px; }
+
+  section { position:relative; padding: 90px 10vw; }
+  #about, #projects { background: var(--bg2); }
+
+  .section-header { display:flex; align-items:center; gap:20px; margin-bottom:56px; }
+  .section-ornament { color: var(--red); font-size:22px; line-height:1; }
+  .section-title { font-family: var(--display); font-size: 11px; color: var(--gold); letter-spacing: 6px; font-weight:600; }
+  .section-line { flex:1; height:1px; background: linear-gradient(to right, var(--border), transparent); }
+  .section-big-title { font-family: var(--display); font-size: clamp(28px, 4vw, 42px); color: var(--bone); letter-spacing: 4px; font-weight:900; }
+
+  .about-grid { display:grid; grid-template-columns: 1fr 1fr; gap:60px; align-items:start; }
+  @media(max-width:768px) { .about-grid { grid-template-columns:1fr; } }
+
+  .about-text p { font-size:17px; color:var(--bone-dim); margin-bottom:18px; font-weight:300; line-height:1.8; }
+  .about-text p strong { color:var(--bone); font-weight:600; }
+
+  .stats-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; }
+  .stat-box { background: var(--bg3); border:1px solid var(--border); padding:28px 20px; text-align:center; transition: border-color 0.3s; }
+  .stat-box:hover { border-color: var(--red); }
+  .stat-num { font-family: var(--display); font-size: 52px; color: var(--red); line-height:1; text-shadow: 0 0 30px rgba(192,21,42,0.4); font-weight:900; }
+  .stat-label { font-family: var(--mono); font-size: 9px; color: var(--bone-dim); letter-spacing: 2px; margin-top: 6px; opacity:0.7; }
+
+  .skills-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap:2px; }
+  .skill-category { background: var(--bg3); border:1px solid var(--border); padding:28px; transition: border-color 0.3s; }
+  .skill-category:hover { border-color: var(--red-dim); }
+  .skill-cat-title { font-family: var(--display); font-size: 9px; color: var(--gold); letter-spacing: 4px; margin-bottom:20px; padding-bottom:12px; border-bottom: 1px solid var(--border); }
+  .skill-list { list-style:none; display:flex; flex-wrap:wrap; gap:8px; }
+  .skill-list li { font-family: var(--mono); font-size: 10px; color: var(--bone-dim); background: var(--bone-faint); border: 1px solid rgba(232,220,200,0.1); padding: 3px 10px; letter-spacing:1px; transition: all 0.2s; }
+  .skill-list li:hover { color:var(--red-bright); border-color:var(--red-dim); background:var(--red-faint); }
+
+  .projects-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(340px,1fr)); gap:2px; }
+  .project-card { background: var(--bg3); border:1px solid var(--border); transition: border-color 0.3s, box-shadow 0.3s; position:relative; overflow:hidden; }
+  .project-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(to right, transparent, var(--red), transparent); opacity:0; transition: opacity 0.3s; }
+  .project-card:hover { border-color:var(--red-dim); box-shadow: 0 0 40px rgba(192,21,42,0.06); }
+  .project-card:hover::before { opacity:1; }
+
+  .project-header { padding:22px 26px 18px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:flex-start; gap:12px; }
+  .project-type { font-family: var(--mono); font-size:9px; color:var(--red-dim); letter-spacing:2px; margin-bottom:6px; }
+  .project-name { font-family: var(--display); font-size:17px; color:var(--bone); font-weight:700; letter-spacing:1px; }
+  .project-badge { font-family: var(--mono); font-size:9px; padding:3px 10px; border:1px solid; letter-spacing:2px; white-space:nowrap; flex-shrink:0; }
+  .badge-security { color:var(--red-bright); border-color:var(--red-dim); background:var(--red-faint); }
+  .badge-dev { color:var(--gold); border-color:var(--gold-dim); background:rgba(201,148,58,0.05); }
+  .badge-infra { color:#a0b8c8; border-color:rgba(160,184,200,0.3); background:rgba(160,184,200,0.04); }
+  .badge-ml { color:#b08ad0; border-color:rgba(176,138,208,0.3); background:rgba(176,138,208,0.04); }
+
+  .project-body { padding:20px 26px 24px; }
+  .project-desc { font-size:15px; color:var(--bone-dim); line-height:1.75; margin-bottom:18px; font-weight:300; }
+  .project-stack { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+  .stack-tag { font-family:var(--mono); font-size:10px; color:var(--bone-dim); background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); padding:2px 8px; letter-spacing:1px; }
+  .project-link { font-family:var(--display); font-size:9px; color:var(--gold); text-decoration:none; border:1px solid var(--border-gold); padding:5px 16px; letter-spacing:3px; transition:all 0.2s; display:inline-block; }
+  .project-link:hover { color:var(--bone); border-color:var(--gold); background:rgba(201,148,58,0.08); }
+
+  .exp-list { display:flex; flex-direction:column; }
+  .exp-item { display:grid; grid-template-columns:200px 1fr; gap:40px; padding:36px 0; border-bottom:1px solid rgba(192,21,42,0.1); position:relative; }
+  .exp-item::before { content:'✦'; position:absolute; left:-24px; top:40px; color:var(--red-dim); font-size:10px; opacity:0.5; }
+  @media(max-width:600px) { .exp-item { grid-template-columns:1fr; gap:12px; } }
+  .exp-date { font-family:var(--mono); font-size:10px; color:var(--red-dim); letter-spacing:2px; padding-top:4px; line-height:1.8; }
+  .exp-company { font-family:var(--display); font-size:9px; color:var(--gold-dim); letter-spacing:3px; margin-top:6px; font-weight:600; }
+  .exp-role { font-family:var(--display); font-size:20px; color:var(--bone); font-weight:700; margin-bottom:14px; letter-spacing:1px; }
+  .exp-bullets { list-style:none; }
+  .exp-bullets li { font-size:15px; color:var(--bone-dim); padding:5px 0 5px 22px; position:relative; font-weight:300; line-height:1.65; }
+  .exp-bullets li::before { content:'—'; position:absolute; left:0; color:var(--red-dim); font-family:var(--mono); }
+
+  #contact { text-align:center; }
+  .contact-inner { max-width:560px; margin:0 auto; }
+  .contact-desc { font-size:18px; color:var(--bone-dim); line-height:1.8; margin-bottom:48px; font-style:italic; }
+  .contact-links { display:flex; justify-content:center; flex-wrap:wrap; gap:12px; }
+  .contact-link { font-family:var(--display); font-size:10px; color:var(--bone-dim); text-decoration:none; border:1px solid var(--border); padding:14px 28px; letter-spacing:3px; display:flex; align-items:center; gap:10px; transition:all 0.3s; font-weight:600; }
+  .contact-link:hover { color:var(--red-bright); border-color:var(--red); box-shadow: 0 0 30px rgba(192,21,42,0.15); }
+
+  footer { border-top:1px solid var(--border); padding:28px 10vw; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+  .footer-text { font-family:var(--mono); font-size:10px; color:rgba(154,143,126,0.3); letter-spacing:2px; }
+  .footer-text span { color:var(--red-dim); }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  .fade-up { opacity:0; animation:fadeUp 0.7s ease forwards; }
+  .d1{animation-delay:0.1s} .d2{animation-delay:0.25s} .d3{animation-delay:0.4s}
+  .d4{animation-delay:0.55s} .d5{animation-delay:0.7s} .d6{animation-delay:0.85s}
+</style>
+</head>
+<body>
+
+<div class="drip-border"></div>
+
+<nav>
+  <div class="nav-logo">G<span class="nav-sigil">✦</span>SKHIRTLADZE</div>
+  <div class="nav-links">
+    <a href="#about">ABOUT</a>
+    <a href="#skills">SKILLS</a>
+    <a href="#projects">PROJECTS</a>
+    <a href="#experience">EXPERIENCE</a>
+    <a href="#contact">CONTACT</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="rune-circle">
+    <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="200" cy="200" r="190" stroke="white" stroke-width="1"/>
+      <circle cx="200" cy="200" r="160" stroke="white" stroke-width="0.5" stroke-dasharray="4 8"/>
+      <circle cx="200" cy="200" r="120" stroke="white" stroke-width="1"/>
+      <polygon points="200,30 370,290 30,290" stroke="white" stroke-width="0.8" fill="none"/>
+      <polygon points="200,370 30,110 370,110" stroke="white" stroke-width="0.8" fill="none"/>
+      <circle cx="200" cy="200" r="8" stroke="white" stroke-width="1"/>
+      <line x1="200" y1="10" x2="200" y2="390" stroke="white" stroke-width="0.3" opacity="0.4"/>
+      <line x1="10" y1="200" x2="390" y2="200" stroke="white" stroke-width="0.3" opacity="0.4"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow fade-up d1">SECURITY ANALYST // TBILISI, GEORGIA</div>
+    <h1>
+      <div class="hero-name fade-up d2">GEORGE</div>
+      <span class="hero-name-accent fade-up d3">SKHIRTLADZE</span>
+    </h1>
+    <div class="hero-title fade-up d3">IT SPECIALIST & VULNERABILITY ANALYST</div>
+    <p class="hero-desc fade-up d4">
+      3+ years defending infrastructure and building <strong>security systems</strong> from the ground up.
+      Focused on <strong>vulnerability management</strong>, phishing simulation, SIEM operations,
+      and Python automation. Training on <strong>HackTheBox</strong>. Open to security roles across Europe.
+    </p>
+    <div class="hero-tags fade-up d4">
+      <span class="tag">VULNERABILITY MGMT</span>
+      <span class="tag">SIEM</span>
+      <span class="tag">PYTHON</span>
+      <span class="tag">BASH</span>
+      <span class="tag">PENETRATION TESTING</span>
+      <span class="tag">HACKTHEBOX</span>
+      <span class="tag">INCIDENT RESPONSE</span>
+    </div>
+    <div class="hero-btns fade-up d5">
+      <a href="#projects" class="btn btn-primary">VIEW PROJECTS</a>
+      <a href="#contact" class="btn btn-secondary">GET IN TOUCH</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-sigil">✦</div><div class="divider-line"></div></div>
+
+<section id="about">
+  <div class="section-header">
+    <span class="section-ornament">✦</span>
+    <span class="section-title">ABOUT</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="section-big-title fade-up d1">WHO I AM</div><br/><br/>
+  <div class="about-grid">
+    <div class="about-text fade-up d2">
+      <p>I'm an IT Specialist and security practitioner based in <strong>Tbilisi, Georgia</strong>, with over 3 years of hands-on experience in cybersecurity operations, infrastructure hardening, and security automation.</p>
+      <p>My work spans designing <strong>phishing simulation campaigns</strong>, operating SIEM platforms, managing network security infrastructure, and writing Python and Bash scripts that make security workflows faster and more reliable.</p>
+      <p>I'm finishing my <strong>B.S. in Informatics</strong> at Georgian-American University and targeting vulnerability analyst and application security roles — locally and remotely across Europe.</p>
+      <p>Outside of work I train on <strong>HackTheBox</strong> to sharpen offensive security skills and build projects to keep growing.</p>
+    </div>
+    <div class="stats-grid fade-up d3">
+      <div class="stat-box"><div class="stat-num">3+</div><div class="stat-label">YEARS EXP</div></div>
+      <div class="stat-box"><div class="stat-num">5+</div><div class="stat-label">PROJECTS</div></div>
+      <div class="stat-box"><div class="stat-num">3</div><div class="stat-label">OS PLATFORMS</div></div>
+      <div class="stat-box"><div class="stat-num">∞</div><div class="stat-label">CURIOSITY</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-sigil">✦</div><div class="divider-line"></div></div>
+
+<section id="skills">
+  <div class="section-header">
+    <span class="section-ornament">✦</span>
+    <span class="section-title">ARSENAL</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="section-big-title fade-up d1">SKILLS</div><br/><br/>
+  <div class="skills-grid">
+    <div class="skill-category fade-up d2">
+      <div class="skill-cat-title">SECURITY & VULNERABILITY</div>
+      <ul class="skill-list">
+        <li>Vulnerability Management</li><li>CVSS Scoring</li><li>SIEM Operations</li>
+        <li>Incident Response</li><li>Threat Detection</li><li>Penetration Testing</li>
+        <li>Burp Suite</li><li>Nessus</li><li>Metasploit</li><li>GoPhish</li>
+      </ul>
+    </div>
+    <div class="skill-category fade-up d3">
+      <div class="skill-cat-title">SCRIPTING & AUTOMATION</div>
+      <ul class="skill-list">
+        <li>Python</li><li>Bash</li><li>PowerShell</li><li>C#</li>
+        <li>Java</li><li>JavaScript</li><li>Security Automation</li><li>Docker</li>
+      </ul>
+    </div>
+    <div class="skill-category fade-up d4">
+      <div class="skill-cat-title">INFRASTRUCTURE & OS</div>
+      <ul class="skill-list">
+        <li>Linux (Ubuntu)</li><li>Windows Server</li><li>macOS</li>
+        <li>Active Directory</li><li>VPN Config</li><li>Firewall Mgmt</li>
+        <li>DNS / DHCP</li><li>VLAN</li>
+      </ul>
+    </div>
+    <div class="skill-category fade-up d5">
+      <div class="skill-cat-title">FRAMEWORKS & STANDARDS</div>
+      <ul class="skill-list">
+        <li>CVSS</li><li>CIS Benchmarks</li><li>Secure SDLC</li><li>ITIL</li>
+        <li>MFA Enforcement</li><li>Least Privilege</li><li>SPF/DKIM/DMARC</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-sigil">✦</div><div class="divider-line"></div></div>
+
+<section id="projects">
+  <div class="section-header">
+    <span class="section-ornament">✦</span>
+    <span class="section-title">WORKS</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="section-big-title fade-up d1">PROJECTS</div><br/><br/>
+  <div class="projects-grid">
+    <div class="project-card fade-up d2">
+      <div class="project-header">
+        <div><div class="project-type">SYSADMIN / SECURITY — GITHUB</div><div class="project-name">AutoSys Toolkit</div></div>
+        <span class="project-badge badge-security">SECURITY</span>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Modular Python toolkit for Linux systems administration and security monitoring. CPU/memory/disk monitoring, automated cleanup, open port scanning, package management, and a Flask web dashboard. Docker-ready.</p>
+        <div class="project-stack"><span class="stack-tag">Python</span><span class="stack-tag">Flask</span><span class="stack-tag">Docker</span><span class="stack-tag">Linux</span><span class="stack-tag">Port Scanning</span></div>
+        <a href="https://github.com/Toshi-hub834/autosys" target="_blank" class="project-link">VIEW ON GITHUB</a>
+      </div>
+    </div>
+
+    <div class="project-card fade-up d3">
+      <div class="project-header">
+        <div><div class="project-type">ML / DATA SCIENCE — GITHUB</div><div class="project-name">Student Performance Predictor</div></div>
+        <span class="project-badge badge-ml">ML</span>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Machine learning model predicting student academic performance from behavioral and demographic features. Demonstrates data analysis, feature engineering, and predictive modeling — skills applicable to security analytics and anomaly detection.</p>
+        <div class="project-stack"><span class="stack-tag">Python</span><span class="stack-tag">scikit-learn</span><span class="stack-tag">Data Analysis</span><span class="stack-tag">ML</span></div>
+        <a href="https://github.com/Toshi-hub834" target="_blank" class="project-link">VIEW ON GITHUB</a>
+      </div>
+    </div>
+
+    <div class="project-card fade-up d4">
+      <div class="project-header">
+        <div><div class="project-type">SECURITY / RED TEAM</div><div class="project-name">Phishing Simulation Platform</div></div>
+        <span class="project-badge badge-security">SECURITY</span>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">End-to-end phishing simulation infrastructure with GoPhish. Custom email templates, realistic landing pages, campaign tracking, and post-campaign awareness reporting to measure and reduce organizational risk.</p>
+        <div class="project-stack"><span class="stack-tag">GoPhish</span><span class="stack-tag">HTML/CSS</span><span class="stack-tag">JavaScript</span><span class="stack-tag">Python</span></div>
+      </div>
+    </div>
+
+    <div class="project-card fade-up d5">
+      <div class="project-header">
+        <div><div class="project-type">INFRASTRUCTURE / HARDENING</div><div class="project-name">Multi-Platform Security Hardening</div></div>
+        <span class="project-badge badge-infra">INFRA</span>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Hardening framework covering Windows, Linux, and macOS. Implements CIS benchmark controls, firewall enforcement, VPN segmentation, MFA rollout, and access control policies across heterogeneous environments.</p>
+        <div class="project-stack"><span class="stack-tag">Windows</span><span class="stack-tag">Linux</span><span class="stack-tag">macOS</span><span class="stack-tag">PowerShell</span><span class="stack-tag">Bash</span></div>
+      </div>
+    </div>
+
+    <div class="project-card fade-up d6">
+      <div class="project-header">
+        <div><div class="project-type">DEVELOPMENT</div><div class="project-name">E-Commerce Platform</div></div>
+        <span class="project-badge badge-dev">DEV</span>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Full-stack online store with ASP.NET Core 8 MVC and C#. Secure authentication, Entity Framework relationships, shopping cart, admin dashboard, and role-based access control.</p>
+        <div class="project-stack"><span class="stack-tag">ASP.NET Core 8</span><span class="stack-tag">C#</span><span class="stack-tag">Entity Framework</span><span class="stack-tag">SQL Server</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-sigil">✦</div><div class="divider-line"></div></div>
+
+<section id="experience">
+  <div class="section-header">
+    <span class="section-ornament">✦</span>
+    <span class="section-title">HISTORY</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="section-big-title fade-up d1">EXPERIENCE</div><br/><br/>
+  <div class="exp-list">
+    <div class="exp-item fade-up d2">
+      <div>
+        <div class="exp-date">JUL 2024<br/>PRESENT</div>
+        <div class="exp-company">GSG 2007</div>
+      </div>
+      <div>
+        <div class="exp-role">IT Specialist</div>
+        <ul class="exp-bullets">
+          <li>Design and run end-to-end phishing simulation campaigns using GoPhish with custom templates and awareness training</li>
+          <li>Monitor security events via SIEM, triage alerts, and support incident response across Windows, Linux, and macOS</li>
+          <li>Write Python and Bash scripts to automate security monitoring, patch compliance, and user provisioning</li>
+          <li>Manage network security infrastructure — VPN, firewalls, DNS/DHCP, MFA, and least-privilege access controls</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item fade-up d3">
+      <div>
+        <div class="exp-date">AUG 2023<br/>MAY 2024</div>
+        <div class="exp-company">FINNISH INTL SCHOOL</div>
+      </div>
+      <div>
+        <div class="exp-role">IT Specialist</div>
+        <ul class="exp-bullets">
+          <li>Administered multi-platform IT infrastructure including networks, servers, and security policies</li>
+          <li>Performed system hardening, patch management, and security audits to minimize attack surface</li>
+          <li>Delivered 1st/2nd line technical support and managed VPN and network equipment configurations</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-sigil">✦</div><div class="divider-line"></div></div>
+
+<section id="contact">
+  <div class="section-header">
+    <span class="section-ornament">✦</span>
+    <span class="section-title">REACH OUT</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="contact-inner">
+    <div class="section-big-title fade-up d1">CONTACT</div><br/><br/>
+    <p class="contact-desc fade-up d2">Open to vulnerability analyst, SOC, and security engineering roles — on-site in Georgia or remote across Europe. Let's talk.</p>
+    <div class="contact-links fade-up d3">
+      <a href="mailto:skhirtladze2016@gmail.com" class="contact-link">✉ EMAIL</a>
+      <a href="https://github.com/Toshi-hub834" target="_blank" class="contact-link">⌥ GITHUB</a>
+      <a href="https://www.linkedin.com/in/george-skhirtladze-04b726272" target="_blank" class="contact-link">◈ LINKEDIN</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-text">© 2026 <span>George Skhirtladze</span></div>
+  <div class="footer-text">Hosted on <span>GitHub Pages</span></div>
+</footer>
+
+</body>
+</html>
