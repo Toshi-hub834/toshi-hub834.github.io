@@ -17,23 +17,74 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 html,body{cursor:none!important;}
-body{background:#060101;color:var(--mid);font-family:var(--B);font-size:17px;line-height:1.75;overflow-x:hidden;}
+body{background:#060101;color:var(--mid);font-family:var(--B);font-size:18px;line-height:1.75;overflow-x:hidden;}
 body.loading *:not(#ld):not(#ld *):not(#co):not(#ci){visibility:hidden!important;}
 body.loading #ld{visibility:visible!important;}
 
 /* CURSOR */
 #co,#ci{position:fixed;pointer-events:none;z-index:9999999;border-radius:50%;visibility:visible!important;}
-#co{width:38px;height:38px;border:1.5px solid rgba(224,24,48,.8);
+#co{width:52px;height:52px;border:1.5px solid rgba(224,24,48,.8);
   transition:width .3s,height .3s,border-color .3s,background .3s;}
-#ci{width:7px;height:7px;background:var(--red);box-shadow:0 0 12px var(--red);}
-#co.h{width:56px;height:56px;border-color:var(--gold);background:rgba(232,173,80,.05);}
-#ci.h{width:10px;height:10px;background:var(--gold);box-shadow:0 0 16px var(--gold);}
+#ci{width:10px;height:10px;background:var(--red);box-shadow:0 0 16px var(--red);}
+#co.h{width:72px;height:72px;border-color:var(--gold);background:rgba(232,173,80,.05);}
+#ci.h{width:14px;height:14px;background:var(--gold);box-shadow:0 0 20px var(--gold);}
 a,button,.btn,.tag,.skl li,.card,.sbox,.cl,.hbg,.pl{cursor:none!important;}
 
 /* SCROLL PROGRESS */
 #spb{position:fixed;top:0;left:0;height:2px;width:0%;z-index:10001;
   background:linear-gradient(90deg,var(--reddim),var(--red),var(--red2));
   box-shadow:0 0 12px var(--red);transition:width .1s;}
+
+/* ── PERSISTENT CRT EFFECTS ── */
+/* ── CRT BARREL WARP OVERLAY ── */
+#crt-barrel{
+  position:fixed;inset:0;z-index:9999;pointer-events:none;
+  /* Dark curved corners — the glass screen effect */
+  box-shadow:
+    inset 0 0 80px  rgba(0,0,0,.7),
+    inset 0 0 140px rgba(0,0,0,.5),
+    inset 0 0 220px rgba(0,0,0,.3);
+  border-radius:4px;
+}
+/* Curved edge darkening — top/bottom warp */
+#crt-barrel::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 120% 15% at 50% 0%,   rgba(0,0,0,.7) 0%,transparent 100%),
+    radial-gradient(ellipse 120% 15% at 50% 100%, rgba(0,0,0,.7) 0%,transparent 100%),
+    radial-gradient(ellipse 15% 120% at 0%   50%, rgba(0,0,0,.7) 0%,transparent 100%),
+    radial-gradient(ellipse 15% 120% at 100% 50%, rgba(0,0,0,.7) 0%,transparent 100%);
+}
+/* Corner crush — the 4 corners go extra dark like curved glass */
+#crt-barrel::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 60% at 0%   0%,   rgba(0,0,0,.6) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 60% at 100% 0%,   rgba(0,0,0,.6) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 60% at 0%   100%, rgba(0,0,0,.6) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 60% at 100% 100%, rgba(0,0,0,.6) 0%,transparent 60%);
+}
+/* RGB fringe on edges */
+.crt-rgb{position:fixed;inset:0;z-index:9995;pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(255,0,0,.06) 0%,transparent 4%,transparent 96%,rgba(0,100,255,.06) 100%),
+    linear-gradient(180deg,rgba(255,0,0,.04) 0%,transparent 4%,transparent 96%,rgba(0,0,255,.04) 100%);}
+/* Horizontal glitch band — fires randomly */
+.crt-glitch-band{position:fixed;left:-5%;right:-5%;height:3px;z-index:9997;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,30,80,.8),rgba(0,200,255,.6),transparent);
+  opacity:0;}
+/* Screen flicker */
+.crt-flicker{position:fixed;inset:0;z-index:9994;pointer-events:none;
+  background:rgba(255,255,255,0);animation:crtflick 7s infinite;}
+@keyframes crtflick{
+  0%,92%,100%{opacity:1}
+  93%{opacity:.7}93.5%{opacity:1}95%{opacity:.75}95.5%{opacity:1}97%{opacity:.6}97.4%{opacity:1}
+}
+/* Sweep line */
+.crt-sweep{position:fixed;left:0;right:0;height:5px;z-index:9993;pointer-events:none;
+  background:linear-gradient(to bottom,transparent,rgba(224,24,48,.1),rgba(255,255,255,.03),transparent);
+  animation:crtsweep 6s linear infinite;}
+@keyframes crtsweep{0%{top:-5px}100%{top:100vh}}
 
 /* LOADER */
 #ld{position:fixed;inset:0;background:#060101;z-index:999998;
@@ -79,14 +130,14 @@ nav{position:fixed;top:2px;left:0;right:0;z-index:9999;height:58px;
   display:flex;align-items:center;justify-content:space-between;
   transform:translateY(-100%);transition:transform .6s cubic-bezier(.25,.46,.45,.94);}
 nav.show{transform:translateY(0);}
-.nl{font-family:var(--D);font-size:13px;letter-spacing:5px;font-weight:600;
+.nl{font-family:var(--D);font-size:16px;letter-spacing:5px;font-weight:600;
   background:linear-gradient(90deg,var(--gold),var(--red),var(--gold));
   background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
   background-clip:text;animation:gradshift 4s linear infinite;
   user-select:none;-webkit-user-select:none;}
 @keyframes gradshift{0%{background-position:0%}100%{background-position:200%}}
 .na{display:flex;gap:32px;}
-.na a{font-family:var(--D);font-size:9px;color:var(--dim);text-decoration:none;
+.na a{font-family:var(--D);font-size:11px;color:var(--dim);text-decoration:none;
   letter-spacing:3px;transition:color .2s;position:relative;
   user-select:none;-webkit-user-select:none;}
 .na a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;
@@ -105,10 +156,10 @@ nav.show{transform:translateY(0);}
 /* HERO */
 #hero{position:relative;min-height:100vh;display:flex;align-items:center;
   padding:120px 8vw 80px;overflow:hidden;z-index:1;}
-.hcont{position:relative;z-index:2;max-width:760px;width:100%;}
+.hcont{position:relative;z-index:2;max-width:900px;width:100%;}
 
 /* Hero entrance animations */
-.hey{font-family:var(--M);font-size:10px;color:var(--red);letter-spacing:5px;
+.hey{font-family:var(--M);font-size:13px;color:var(--red);letter-spacing:6px;
   margin-bottom:20px;display:flex;align-items:center;gap:14px;
   opacity:0;transform:translateX(-20px);transition:opacity .6s,transform .6s;
   user-select:none;-webkit-user-select:none;}
@@ -116,12 +167,12 @@ nav.show{transform:translateY(0);}
 .hey.in{opacity:1;transform:translateX(0);}
 
 .hname-wrap{overflow:visible;line-height:1;}
-.hname-inner{font-family:var(--D);font-size:clamp(50px,9vw,108px);
+.hname-inner{font-family:var(--D);font-size:clamp(70px,11vw,160px);
   color:var(--bone);letter-spacing:3px;font-weight:900;
   transform:translateY(110%);transition:transform .8s cubic-bezier(.25,.46,.45,.94);
   user-select:none;-webkit-user-select:none;}
-.hname2-wrap{overflow:visible;line-height:1;margin-bottom:28px;}
-.hname2-inner{font-family:var(--D);font-size:clamp(50px,9vw,108px);
+.hname2-wrap{overflow:visible;line-height:1;margin-bottom:32px;}
+.hname2-inner{font-family:var(--D);font-size:clamp(70px,11vw,160px);
   color:var(--red);letter-spacing:3px;font-weight:900;
   text-shadow:0 0 100px rgba(224,24,48,.6),0 0 200px rgba(224,24,48,.2);
   transform:translateY(110%);transition:transform .8s cubic-bezier(.25,.46,.45,.94) .15s;
@@ -150,25 +201,25 @@ nav.show{transform:translateY(0);}
   93%{opacity:1;transform:translate(-3px,0);clip-path:polygon(0 50%,100% 50%,100% 90%,0 90%);}
   95%{opacity:0;}}
 
-.htit{font-family:var(--D);font-size:11px;color:var(--gold);letter-spacing:6px;
+.htit{font-family:var(--D);font-size:15px;color:var(--gold);letter-spacing:7px;
   font-weight:400;margin-bottom:24px;display:flex;align-items:center;gap:14px;
   opacity:0;transform:translateY(16px);transition:opacity .6s .4s,transform .6s .4s;
   user-select:none;-webkit-user-select:none;}
 .htit::after{content:'';flex:1;max-width:80px;height:1px;background:linear-gradient(90deg,var(--gd),transparent);}
 .htit.in{opacity:1;transform:translateY(0);}
 
-.hdesc{font-size:18px;color:var(--mid);line-height:1.9;max-width:520px;
-  margin-bottom:32px;font-weight:300;font-style:italic;
+.hdesc{font-size:21px;color:var(--mid);line-height:1.9;max-width:620px;
+  margin-bottom:36px;font-weight:300;font-style:italic;
   opacity:0;transform:translateY(16px);transition:opacity .6s .5s,transform .6s .5s;}
 .hdesc strong{color:var(--bone);font-style:normal;font-weight:600;}
 .hdesc.in{opacity:1;transform:translateY(0);}
 
-.htags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px;
+.htags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:44px;
   opacity:0;transform:translateY(16px);transition:opacity .6s .6s,transform .6s .6s;}
 .htags.in{opacity:1;transform:translateY(0);}
-.tag{font-family:var(--M);font-size:9px;color:var(--mid);
+.tag{font-family:var(--M);font-size:11px;color:var(--mid);
   border:1px solid rgba(248,240,228,.13);background:var(--faint);
-  padding:5px 14px;letter-spacing:2px;transition:all .3s;
+  padding:7px 18px;letter-spacing:2px;transition:all .3s;
   user-select:none;-webkit-user-select:none;}
 .tag:hover{color:var(--red2);border-color:var(--red);background:var(--rf);transform:translateY(-3px);}
 
@@ -215,7 +266,7 @@ section{position:relative;padding:80px 8vw;z-index:1;}
 .st{font-family:var(--D);font-size:9px;color:var(--gold);letter-spacing:7px;font-weight:600;
   user-select:none;-webkit-user-select:none;}
 .sline{flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);}
-.sbt{font-family:var(--D);font-size:clamp(34px,4.5vw,54px);color:var(--bone);
+.sbt{font-family:var(--D);font-size:clamp(40px,5vw,68px);color:var(--bone);
   letter-spacing:5px;font-weight:900;margin-bottom:48px;position:relative;display:inline-block;
   user-select:none;-webkit-user-select:none;}
 .sbt::after{content:'';position:absolute;bottom:-8px;left:0;width:0;height:2px;
@@ -225,7 +276,7 @@ section{position:relative;padding:80px 8vw;z-index:1;}
 
 /* ABOUT */
 .agrid{display:grid;grid-template-columns:1.3fr 1fr;gap:64px;align-items:start;}
-.atxt p{font-size:17px;color:var(--mid);margin-bottom:18px;font-weight:300;line-height:1.9;}
+.atxt p{font-size:18px;color:var(--mid);margin-bottom:18px;font-weight:300;line-height:1.9;}
 .atxt p strong{color:var(--bone);font-weight:600;}
 
 .sgrid{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
@@ -237,7 +288,7 @@ section{position:relative;padding:80px 8vw;z-index:1;}
 .sbox:hover{border-color:var(--red);transform:translateY(-6px);
   box-shadow:0 12px 40px rgba(224,24,48,.15);}
 .sbox:hover::after{opacity:1;}
-.snum{font-family:var(--D);font-size:62px;color:var(--red);line-height:1;
+.snum{font-family:var(--D);font-size:72px;color:var(--red);line-height:1;
   text-shadow:0 0 40px rgba(224,24,48,.5);font-weight:900;
   user-select:none;-webkit-user-select:none;}
 .slbl{font-family:var(--M);font-size:8px;color:var(--mid);letter-spacing:2px;margin-top:8px;
@@ -513,6 +564,8 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
   opacity:0;transition:opacity .3s;}
 .cert-card:hover{border-color:var(--gold);transform:translateY(-4px);}
 .cert-card:hover::before{opacity:1;}
+.cert-icon{font-family:'Cinzel',serif;font-size:22px;color:var(--red);
+  margin-bottom:12px;text-shadow:0 0 20px rgba(224,24,48,.5);}
 .cert-name{font-family:var(--D);font-size:13px;color:var(--bone);font-weight:700;
   letter-spacing:1px;margin-bottom:6px;}
 .cert-org{font-family:var(--M);font-size:9px;color:var(--gold);letter-spacing:2px;margin-bottom:10px;}
@@ -526,6 +579,8 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
 .edu-card{background:var(--bg3);border:1px solid var(--border);padding:28px;
   display:flex;gap:24px;align-items:flex-start;transition:border-color .3s,transform .3s;margin-top:8px;}
 .edu-card:hover{border-color:var(--gold);transform:translateY(-3px);}
+.edu-icon{font-family:'Cinzel',serif;font-size:30px;color:var(--gold);flex-shrink:0;
+  text-shadow:0 0 20px rgba(232,173,80,.4);}
 .edu-deg{font-family:var(--D);font-size:16px;color:var(--bone);font-weight:700;margin-bottom:4px;}
 .edu-school{font-family:var(--D);font-size:11px;color:var(--gold);letter-spacing:2px;margin-bottom:8px;}
 .edu-dates{font-family:var(--M);font-size:9px;color:var(--red);letter-spacing:2px;margin-bottom:12px;}
@@ -586,7 +641,7 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
   .terminal{width:100%;max-width:100%;}
   nav{padding:0 5vw;}.na{display:none;}.hbg{display:flex;}
   section{padding:60px 5vw;}#hero{padding:100px 5vw 70px;}
-  .hname-inner,.hname2-inner{font-size:clamp(40px,12vw,80px);letter-spacing:1px;}
+  .hname-inner,.hname2-inner{font-size:clamp(50px,14vw,90px);letter-spacing:1px;}
   .exi{grid-template-columns:1fr;gap:10px;}
   .exi::before,.exlist::before{display:none;}
   .pgrid{grid-template-columns:1fr;}.div{padding:0 5vw;}
@@ -621,7 +676,7 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
     <div class="kon-div"></div>
     <div class="kon-msg">
       <p>George Skhirtladze — Security Analyst</p>
-      <p>3+ years · 6 projects · HackTheBox · Open to Europe</p>
+      <p>3+ years · 7 projects · HackTheBox · Open to Europe</p>
       <p class="kon-contact"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2b58404342595f474a4f514e191b1a1d6b4c464a424705484446">[email&#160;protected]</a></p>
     </div>
     <div class="kon-btns">
@@ -654,6 +709,14 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
     </div>
   </div>
 </div>
+
+<!-- CRT PERSISTENT EFFECTS -->
+<div id="crt-barrel"></div>
+<div class="crt-rgb"></div>
+<div class="crt-flicker"></div>
+<div class="crt-sweep"></div>
+<div class="crt-glitch-band" id="crt-band1"></div>
+<div class="crt-glitch-band" id="crt-band2"></div>
 
 <div id="ld">
   <div class="ld-sig">✦</div>
@@ -809,6 +872,11 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
       <div class="pbdy"><p class="pdesc">ML-powered phishing email classifier combining Random Forest classification with TF-IDF text vectorization and 17 heuristic features — urgency keyword detection, URL analysis, sender domain mismatch, caps ratio, and more.</p>
         <div class="pstk"><span class="stk">Python</span><span class="stk">scikit-learn</span><span class="stk">Random Forest</span><span class="stk">TF-IDF</span><span class="stk">NLP</span><span class="stk">ML</span></div>
         <div class="pl">VIEW DETAILS →</div></div></div>
+    <div class="card r d1" data-project="honeytrap" onclick="openModal('honeytrap')"><div class="shimmer"></div>
+      <div class="phead"><div><div class="ptyp">SECURITY / ACTIVE DEFENSE</div><div class="pnm">HoneyTrap</div></div><span class="pb bs">SECURITY</span></div>
+      <div class="pbdy"><p class="pdesc">Multi-service honeypot simulating SSH, HTTP, FTP, and Telnet servers to capture real attacker behavior in real time. Features a live dashboard, GeoIP lookup, threat scoring, credential harvesting, and exportable incident reports.</p>
+        <div class="pstk"><span class="stk">Python</span><span class="stk">Flask</span><span class="stk">Raw Sockets</span><span class="stk">SSE</span><span class="stk">GeoIP</span><span class="stk">Threading</span></div>
+        <div class="pl">VIEW DETAILS →</div></div></div>
   </div>
 </section>
 
@@ -845,6 +913,7 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
   <div class="sbt r d1">EDUCATION & CERTS</div>
 
   <div class="edu-card r d2">
+    <div class="edu-icon">✦</div>
     <div>
       <div class="edu-deg">B.S. in Informatics</div>
       <div class="edu-school">GEORGIAN-AMERICAN UNIVERSITY · TBILISI</div>
@@ -856,18 +925,27 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
   <br/>
   <div class="certs-grid">
     <div class="cert-card r d2">
+      <div class="cert-icon">✦</div>
       <div class="cert-name">HackTheBox Training</div>
       <div class="cert-org">HACKTHEBOX ACADEMY</div>
       <div class="cert-status cert-prog">⬤ IN PROGRESS</div>
     </div>
     <div class="cert-card r d3">
+      <div class="cert-icon">✦</div>
       <div class="cert-name">ITIL 4 Foundation</div>
       <div class="cert-org">AXELOS / IT SERVICE MGMT</div>
       <div class="cert-status cert-done">✓ COMPLETED</div>
     </div>
+    <div class="cert-card r d4">
+      <div class="cert-icon">✦</div>
+      <div class="cert-name">JavaScript & React</div>
+      <div class="cert-org">GEOLAB BOOTCAMP</div>
+      <div class="cert-status cert-done">✓ COMPLETED</div>
+    </div>
     <div class="cert-card r d5">
-      <div class="cert-name">CompTIA Security+</div>
-      <div class="cert-org">COMPTIA</div>
+      <div class="cert-icon">✦</div>
+      <div class="cert-name">eJPT / CEH</div>
+      <div class="cert-org">ELEARNSECURITY / EC-COUNCIL</div>
       <div class="cert-status cert-prog">⬤ PLANNED 2026</div>
     </div>
   </div>
@@ -982,16 +1060,45 @@ setTimeout(()=>{
 
 setTimeout(()=>{
   const ld=document.getElementById('ld');
-  if(ld){ld.style.transition='opacity .8s';ld.style.opacity='0';}
+  if(ld){ld.style.transition='opacity .6s';ld.style.opacity='0';}
   setTimeout(()=>{
     if(ld)ld.style.visibility='hidden';
     document.body.classList.remove('loading');
     initThree();
     setTimeout(()=>document.getElementById('nav')?.classList.add('show'),100);
-    const seq={hey:200,hn1:400,hn2:550,htit:700,hdesc:800,htags:900,hbtns:1000,scind:1100};
+    const seq={hey:200,hn1:350,hn2:500,htit:650,hdesc:750,htags:850,hbtns:950,scind:1050};
     Object.entries(seq).forEach(([id,d])=>setTimeout(()=>document.getElementById(id)?.classList.add('in'),d));
-  },800);
+  },700);
 },2400);
+
+// ── RANDOM CRT GLITCH BANDS ──
+function fireGlitch(){
+  const bands=[document.getElementById('crt-band1'),document.getElementById('crt-band2')];
+  const numBands=Math.random()>.6?2:1;
+  for(let i=0;i<numBands;i++){
+    const band=bands[i];
+    if(!band)continue;
+    const topPct=10+Math.random()*80;
+    const dur=40+Math.random()*80;
+    const offset=(Math.random()-.5)*8;
+    band.style.top=topPct+'%';
+    band.style.transform=`translateX(${offset}px)`;
+    band.style.opacity='1';
+    band.style.height=(2+Math.random()*4)+'px';
+    setTimeout(()=>{band.style.opacity='0';},dur);
+    // Sometimes a second flash
+    if(Math.random()>.5){
+      setTimeout(()=>{
+        band.style.top=(topPct+Math.random()*10-5)+'%';
+        band.style.opacity='.6';
+      },dur+30);
+      setTimeout(()=>{band.style.opacity='0';},dur+80);
+    }
+  }
+  // Schedule next glitch — random interval between 1.5s and 6s
+  setTimeout(fireGlitch,1500+Math.random()*4500);
+}
+setTimeout(fireGlitch,3000);
 
 document.addEventListener('DOMContentLoaded',()=>{
 
@@ -1254,7 +1361,7 @@ const cntObs=new IntersectionObserver(entries=>{
     if(e.isIntersecting){
       const id=e.target.id;
       if(id==='cnt1')animateCounter(e.target,3,'+');
-      else if(id==='cnt2')animateCounter(e.target,6,'');
+      else if(id==='cnt2')animateCounter(e.target,7,'');
       else if(id==='cnt3')animateCounter(e.target,3,'+');
       cntObs.unobserve(e.target);
     }
@@ -1320,6 +1427,15 @@ const PROJECTS={
     desc:'ML-powered phishing email classifier combining <strong>Random Forest classification</strong> with TF-IDF text vectorization and 17 hand-crafted heuristic features. Detects urgency keywords, suspicious URL patterns, sender domain mismatches, excessive capitalization, and more. Outputs <strong>confidence scores and risk levels</strong> (Critical/High/Medium/Low).',
     feats:['Random Forest classifier trained on synthetic phishing/legitimate email dataset','TF-IDF vectorization of email body text','17 heuristic features: urgency keywords, URL count, caps ratio, domain mismatch, etc.','Confidence score output (0-100%) with risk level classification','Interactive CLI mode — analyze any email text in real time','HTML report generation with feature breakdown'],
     stack:['Python','scikit-learn','Random Forest','TF-IDF','NLP','Feature Engineering','ML Pipeline']
+  },
+  honeytrap:{
+    cat:'SECURITY / ACTIVE DEFENSE',
+    title:'HoneyTrap',
+    gh:'https://github.com/Toshi-hub834/honeytrap',
+    imgs:['assets/honeytrap-dashboard.png','assets/honeytrap-creds.png'],
+    desc:'Production-quality honeypot built from <strong>raw Python sockets</strong> — no frameworks. Simulates SSH, HTTP, FTP, and Telnet services to lure attackers, logs every connection with <strong>GeoIP intelligence</strong>, scores threats automatically as CRITICAL/HIGH/MEDIUM/LOW based on aggression patterns, and harvests credentials from brute force attempts. The live dashboard streams events via <strong>Server-Sent Events</strong> with attack timeline, top IPs, country breakdown, and one-click HTML incident report generation.',
+    feats:['SSH, HTTP, FTP and Telnet honeypot listeners on configurable ports','Real-time attack feed via Server-Sent Events — no page refresh','GeoIP lookup — attacker country, city and ISP via ip-api.com','Automatic threat scoring: CRITICAL / HIGH / MEDIUM / LOW','Credential harvesting — captures every username and password attempt','Telnet shell simulation — logs full command sequences from IoT bots','HTTP scanner detection — flags path traversal, SQLi, XSS, login attempts','One-click exportable HTML incident report with full attack log'],
+    stack:['Python','Flask','Raw Sockets','SSE','GeoIP','Threat Intelligence','Threading','JSON Logging']
   }
 };
 
