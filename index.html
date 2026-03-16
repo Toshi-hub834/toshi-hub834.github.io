@@ -17,7 +17,7 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 html,body{cursor:none!important;}
-body{background:#060101;color:var(--mid);font-family:var(--B);font-size:18px;line-height:1.75;overflow-x:hidden;}
+body{background:#060101;color:var(--mid);font-family:var(--B);font-size:14px;line-height:1.75;overflow-x:hidden;}
 body.loading *:not(#ld):not(#ld *):not(#co):not(#ci){visibility:hidden!important;}
 body.loading #ld{visibility:visible!important;}
 
@@ -35,35 +35,6 @@ a,button,.btn,.tag,.skl li,.card,.sbox,.cl,.hbg,.pl{cursor:none!important;}
   background:linear-gradient(90deg,var(--reddim),var(--red),var(--red2));
   box-shadow:0 0 12px var(--red);transition:width .1s;}
 
-/* ── PERSISTENT CRT EFFECTS ── */
-/* ── CRT BARREL WARP OVERLAY ── */
-#crt-barrel{
-  position:fixed;inset:0;z-index:9999;pointer-events:none;
-  /* Dark curved corners — the glass screen effect */
-  box-shadow:
-    inset 0 0 80px  rgba(0,0,0,.7),
-    inset 0 0 140px rgba(0,0,0,.5),
-    inset 0 0 220px rgba(0,0,0,.3);
-  border-radius:4px;
-}
-/* Curved edge darkening — top/bottom warp */
-#crt-barrel::before{
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background:
-    radial-gradient(ellipse 120% 15% at 50% 0%,   rgba(0,0,0,.7) 0%,transparent 100%),
-    radial-gradient(ellipse 120% 15% at 50% 100%, rgba(0,0,0,.7) 0%,transparent 100%),
-    radial-gradient(ellipse 15% 120% at 0%   50%, rgba(0,0,0,.7) 0%,transparent 100%),
-    radial-gradient(ellipse 15% 120% at 100% 50%, rgba(0,0,0,.7) 0%,transparent 100%);
-}
-/* Corner crush — the 4 corners go extra dark like curved glass */
-#crt-barrel::after{
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background:
-    radial-gradient(ellipse 60% 60% at 0%   0%,   rgba(0,0,0,.6) 0%,transparent 60%),
-    radial-gradient(ellipse 60% 60% at 100% 0%,   rgba(0,0,0,.6) 0%,transparent 60%),
-    radial-gradient(ellipse 60% 60% at 0%   100%, rgba(0,0,0,.6) 0%,transparent 60%),
-    radial-gradient(ellipse 60% 60% at 100% 100%, rgba(0,0,0,.6) 0%,transparent 60%);
-}
 /* RGB fringe on edges */
 .crt-rgb{position:fixed;inset:0;z-index:9995;pointer-events:none;
   background:
@@ -167,12 +138,12 @@ nav.show{transform:translateY(0);}
 .hey.in{opacity:1;transform:translateX(0);}
 
 .hname-wrap{overflow:visible;line-height:1;}
-.hname-inner{font-family:var(--D);font-size:clamp(70px,11vw,160px);
+.hname-inner{font-family:var(--D);font-size:clamp(36px,5.5vw,80px);
   color:var(--bone);letter-spacing:3px;font-weight:900;
   transform:translateY(110%);transition:transform .8s cubic-bezier(.25,.46,.45,.94);
   user-select:none;-webkit-user-select:none;}
-.hname2-wrap{overflow:visible;line-height:1;margin-bottom:32px;}
-.hname2-inner{font-family:var(--D);font-size:clamp(70px,11vw,160px);
+.hname2-wrap{overflow:visible;line-height:1;margin-bottom:28px;}
+.hname2-inner{font-family:var(--D);font-size:clamp(36px,5.5vw,80px);
   color:var(--red);letter-spacing:3px;font-weight:900;
   text-shadow:0 0 100px rgba(224,24,48,.6),0 0 200px rgba(224,24,48,.2);
   transform:translateY(110%);transition:transform .8s cubic-bezier(.25,.46,.45,.94) .15s;
@@ -208,7 +179,7 @@ nav.show{transform:translateY(0);}
 .htit::after{content:'';flex:1;max-width:80px;height:1px;background:linear-gradient(90deg,var(--gd),transparent);}
 .htit.in{opacity:1;transform:translateY(0);}
 
-.hdesc{font-size:21px;color:var(--mid);line-height:1.9;max-width:620px;
+.hdesc{font-size:15px;color:var(--mid);line-height:1.9;max-width:620px;
   margin-bottom:36px;font-weight:300;font-style:italic;
   opacity:0;transform:translateY(16px);transition:opacity .6s .5s,transform .6s .5s;}
 .hdesc strong{color:var(--bone);font-style:normal;font-weight:600;}
@@ -266,7 +237,7 @@ section{position:relative;padding:80px 8vw;z-index:1;}
 .st{font-family:var(--D);font-size:9px;color:var(--gold);letter-spacing:7px;font-weight:600;
   user-select:none;-webkit-user-select:none;}
 .sline{flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);}
-.sbt{font-family:var(--D);font-size:clamp(40px,5vw,68px);color:var(--bone);
+.sbt{font-family:var(--D);font-size:clamp(28px,3.5vw,48px);color:var(--bone);
   letter-spacing:5px;font-weight:900;margin-bottom:48px;position:relative;display:inline-block;
   user-select:none;-webkit-user-select:none;}
 .sbt::after{content:'';position:absolute;bottom:-8px;left:0;width:0;height:2px;
@@ -276,7 +247,7 @@ section{position:relative;padding:80px 8vw;z-index:1;}
 
 /* ABOUT */
 .agrid{display:grid;grid-template-columns:1.3fr 1fr;gap:64px;align-items:start;}
-.atxt p{font-size:18px;color:var(--mid);margin-bottom:18px;font-weight:300;line-height:1.9;}
+.atxt p{font-size:14px;color:var(--mid);margin-bottom:18px;font-weight:300;line-height:1.9;}
 .atxt p strong{color:var(--bone);font-weight:600;}
 
 .sgrid{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
@@ -288,7 +259,7 @@ section{position:relative;padding:80px 8vw;z-index:1;}
 .sbox:hover{border-color:var(--red);transform:translateY(-6px);
   box-shadow:0 12px 40px rgba(224,24,48,.15);}
 .sbox:hover::after{opacity:1;}
-.snum{font-family:var(--D);font-size:72px;color:var(--red);line-height:1;
+.snum{font-family:var(--D);font-size:48px;color:var(--red);line-height:1;
   text-shadow:0 0 40px rgba(224,24,48,.5);font-weight:900;
   user-select:none;-webkit-user-select:none;}
 .slbl{font-family:var(--M);font-size:8px;color:var(--mid);letter-spacing:2px;margin-top:8px;
@@ -376,7 +347,7 @@ section{position:relative;padding:80px 8vw;z-index:1;}
   user-select:none;-webkit-user-select:none;}
 .exco{font-family:var(--D);font-size:13px;color:var(--gold);letter-spacing:3px;margin-top:8px;font-weight:700;
   user-select:none;-webkit-user-select:none;}
-.exrl{font-family:var(--D);font-size:22px;color:var(--bone);font-weight:700;margin-bottom:16px;letter-spacing:1px;}
+.exrl{font-family:var(--D);font-size:17px;color:var(--bone);font-weight:700;margin-bottom:16px;letter-spacing:1px;}
 .exbl{list-style:none;}
 .exbl li{font-size:15px;color:var(--mid);padding:5px 0 5px 20px;position:relative;
   font-weight:300;line-height:1.75;transition:color .2s;}
@@ -387,7 +358,7 @@ section{position:relative;padding:80px 8vw;z-index:1;}
 /* CONTACT */
 #contact{text-align:center;padding:80px 8vw 100px;}
 .ctinn{max-width:600px;margin:0 auto;}
-.ctdesc{font-size:18px;color:var(--mid);line-height:1.9;margin-bottom:48px;font-style:italic;}
+.ctdesc{font-size:15px;color:var(--mid);line-height:1.9;margin-bottom:48px;font-style:italic;}
 .ctlinks{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;}
 .cl{font-family:var(--D);font-size:9px;color:var(--mid);text-decoration:none;
   border:1px solid var(--border);padding:16px 32px;letter-spacing:4px;
@@ -641,7 +612,7 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
   .terminal{width:100%;max-width:100%;}
   nav{padding:0 5vw;}.na{display:none;}.hbg{display:flex;}
   section{padding:60px 5vw;}#hero{padding:100px 5vw 70px;}
-  .hname-inner,.hname2-inner{font-size:clamp(50px,14vw,90px);letter-spacing:1px;}
+  .hname-inner,.hname2-inner{font-size:clamp(28px,9vw,54px);letter-spacing:1px;}
   .exi{grid-template-columns:1fr;gap:10px;}
   .exi::before,.exlist::before{display:none;}
   .pgrid{grid-template-columns:1fr;}.div{padding:0 5vw;}
@@ -710,8 +681,6 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
   </div>
 </div>
 
-<!-- CRT PERSISTENT EFFECTS -->
-<div id="crt-barrel"></div>
 <div class="crt-rgb"></div>
 <div class="crt-flicker"></div>
 <div class="crt-sweep"></div>
@@ -875,6 +844,11 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
     <div class="card r d1" data-project="honeytrap" onclick="openModal('honeytrap')"><div class="shimmer"></div>
       <div class="phead"><div><div class="ptyp">SECURITY / ACTIVE DEFENSE</div><div class="pnm">HoneyTrap</div></div><span class="pb bs">SECURITY</span></div>
       <div class="pbdy"><p class="pdesc">Multi-service honeypot simulating SSH, HTTP, FTP, and Telnet servers to capture real attacker behavior in real time. Features a live dashboard, GeoIP lookup, threat scoring, credential harvesting, and exportable incident reports.</p>
+        <div class="pstk"><span class="stk">Python</span><span class="stk">Flask</span><span class="stk">Raw Sockets</span><span class="stk">SSE</span><span class="stk">GeoIP</span><span class="stk">Threading</span></div>
+        <div class="pl">VIEW DETAILS →</div></div></div>
+    <div class="card r d1" data-project="honeytrap" onclick="openModal('honeytrap')"><div class="shimmer"></div>
+      <div class="phead"><div><div class="ptyp">SECURITY / ACTIVE DEFENSE</div><div class="pnm">HoneyTrap</div></div><span class="pb bs">SECURITY</span></div>
+      <div class="pbdy"><p class="pdesc">Multi-service honeypot simulating SSH, HTTP, FTP, and Telnet servers to capture real attacker behavior in real time. Features a live Flask dashboard, GeoIP lookup, automatic threat scoring, credential harvesting, and exportable HTML incident reports.</p>
         <div class="pstk"><span class="stk">Python</span><span class="stk">Flask</span><span class="stk">Raw Sockets</span><span class="stk">SSE</span><span class="stk">GeoIP</span><span class="stk">Threading</span></div>
         <div class="pl">VIEW DETAILS →</div></div></div>
   </div>
@@ -1086,16 +1060,11 @@ function fireGlitch(){
     band.style.opacity='1';
     band.style.height=(2+Math.random()*4)+'px';
     setTimeout(()=>{band.style.opacity='0';},dur);
-    // Sometimes a second flash
     if(Math.random()>.5){
-      setTimeout(()=>{
-        band.style.top=(topPct+Math.random()*10-5)+'%';
-        band.style.opacity='.6';
-      },dur+30);
+      setTimeout(()=>{band.style.top=(topPct+Math.random()*10-5)+'%';band.style.opacity='.6';},dur+30);
       setTimeout(()=>{band.style.opacity='0';},dur+80);
     }
   }
-  // Schedule next glitch — random interval between 1.5s and 6s
   setTimeout(fireGlitch,1500+Math.random()*4500);
 }
 setTimeout(fireGlitch,3000);
