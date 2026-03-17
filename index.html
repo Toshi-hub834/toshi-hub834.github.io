@@ -729,7 +729,7 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
     <div class="hbtns" id="hbtns">
       <a href="#projects" class="btn btn-p">VIEW PROJECTS</a>
       <a href="#contact" class="btn btn-s">GET IN TOUCH</a>
-      <a href="George_Skhirtladze_CV.pdf" download class="btn btn-cv"> DOWNLOAD CV</a>
+      <a href="George_Skhirtladze_CV.pdf" download class="btn btn-cv">DOWNLOAD CV</a>
     </div>
   </div>
   <!-- TERMINAL WIDGET -->
@@ -959,13 +959,29 @@ function beep(f,d,v){
 function initThree(){
   const canvas=document.getElementById('bg');
   if(!canvas||typeof THREE==='undefined')return;
-  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+
+  // ── PERFORMANCE DETECTION ──
+  const isLowEnd=(
+    navigator.hardwareConcurrency<=2 ||
+    /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+    window.innerWidth<768
+  );
+
+  // Low-end: skip Three.js entirely, just show a static dark bg
+  if(isLowEnd){
+    canvas.style.display='none';
+    return;
+  }
+
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:false,alpha:true,powerPreference:'low-power'});
+  renderer.setPixelRatio(1); // always 1, never retina
   renderer.setSize(window.innerWidth,window.innerHeight);
   const scene=new THREE.Scene();
   const camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,.1,1000);
   camera.position.z=5;
-  const count=2500;
+
+  // Reduce particle count based on screen size
+  const count=window.innerWidth>1200?1500:800;
   const geo=new THREE.BufferGeometry();
   const pos=new Float32Array(count*3),cols=new Float32Array(count*3);
   for(let i=0;i<count;i++){
@@ -982,7 +998,7 @@ function initThree(){
   scene.add(pts);
   const shapes=[];
   [new THREE.IcosahedronGeometry(.3,0),new THREE.OctahedronGeometry(.25,0),new THREE.TetrahedronGeometry(.28,0)].forEach((g,gi)=>{
-    for(let i=0;i<3;i++){
+    for(let i=0;i<2;i++){
       const m=new THREE.MeshBasicMaterial({color:gi%2===0?0xe01830:0xe8ad50,wireframe:true,transparent:true,opacity:.12});
       const mesh=new THREE.Mesh(g,m);
       mesh.position.set((Math.random()-.5)*12,(Math.random()-.5)*8,(Math.random()-.5)*4-2);
@@ -993,16 +1009,18 @@ function initThree(){
   let mx=0,my=0;
   document.addEventListener('mousemove',e=>{mx=(e.clientX/window.innerWidth-.5)*2;my=-(e.clientY/window.innerHeight-.5)*2;},{passive:true});
   window.addEventListener('resize',()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight);});
-  let t=0;
-  (function animate(){
-    requestAnimationFrame(animate);t+=.005;
+  let t=0,last=0;
+  (function animate(now){
+    requestAnimationFrame(animate);
+    if(now-last<32)return; // ~30fps cap
+    last=now;t+=.005;
     pts.rotation.y+=.0003;pts.rotation.x+=.0001;
     camera.position.x+=(mx*.5-camera.position.x)*.04;
     camera.position.y+=(my*.3-camera.position.y)*.04;
     camera.lookAt(scene.position);
     shapes.forEach(s=>{s.rotation.x+=s.userData.rx;s.rotation.y+=s.userData.ry;s.position.y=s.userData.oy+Math.sin(t+s.userData.t)*.25;});
     renderer.render(scene,camera);
-  })();
+  })(0);
 }
 
 // ── PARTICLES ──
