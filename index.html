@@ -700,7 +700,7 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
     <a href="#about">ABOUT</a><a href="#skills">SKILLS</a>
     <a href="#projects">PROJECTS</a><a href="#experience">EXPERIENCE</a>
     <a href="#certs">CERTS</a><a href="#contact">CONTACT</a>
-    <a href="George_Skhirtladze_CV.pdf" download class="nav-cv">CV</a>
+    <a href="George_Skhirtladze_CV.pdf" download class="nav-cv">⬇ CV</a>
   </div>
   <div class="otw-badge"><span class="otw-dot"></span>OPEN TO WORK</div>
   <div class="hbg" id="hbg" onclick="tNav()"><span></span><span></span><span></span></div>
@@ -719,9 +719,9 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
       <div class="hname2-wrap"><div class="hname2-inner glitch" data-text="SKHIRTLADZE" id="hn2">SKHIRTLADZE</div></div>
     </h1>
     <div class="htit" id="htit">IT SUPPORT ENGINEER & SECURITY ANALYST</div>
-    <p class="hdesc" id="hdesc">3+ years defending infrastructure and building <strong>security systems</strong> from the ground up. Focused on <strong>vulnerability management</strong>, phishing simulation, SIEM operations, and Python automation. Training on <strong>HackTheBox</strong>. Open to roles across Europe.</p>
+    <p class="hdesc" id="hdesc">3+ years defending infrastructure and building <strong>security systems</strong> from the ground up. Focused on <strong>vulnerability management</strong>, phishing simulation, network monitoring, and Python automation. Training on <strong>HackTheBox</strong>. Open to roles across Europe.</p>
     <div class="htags" id="htags">
-      <span class="tag">VULNERABILITY MGMT</span><span class="tag">SIEM</span>
+      <span class="tag">VULNERABILITY MGMT</span><span class="tag">GRAFANA</span>
       <span class="tag">PYTHON</span><span class="tag">BASH</span>
       <span class="tag">PENETRATION TESTING</span><span class="tag">HACKTHEBOX</span>
       <span class="tag">INCIDENT RESPONSE</span>
@@ -729,7 +729,7 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
     <div class="hbtns" id="hbtns">
       <a href="#projects" class="btn btn-p">VIEW PROJECTS</a>
       <a href="#contact" class="btn btn-s">GET IN TOUCH</a>
-      <a href="George_Skhirtladze_CV.pdf" download class="btn btn-cv">DOWNLOAD CV</a>
+      <a href="George_Skhirtladze_CV.pdf" download class="btn btn-cv">⬇ DOWNLOAD CV</a>
     </div>
   </div>
   <!-- TERMINAL WIDGET -->
@@ -751,7 +751,7 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
   <div class="agrid">
     <div class="atxt rl d2">
       <p>I'm an IT Support Engineer and security practitioner based in <strong>Tbilisi, Georgia</strong>, with over 3 years of hands-on experience in cybersecurity operations, infrastructure hardening, and security automation.</p>
-      <p>My work spans designing <strong>phishing simulation campaigns</strong>, operating SIEM platforms, managing network security infrastructure, and writing Python and Bash scripts that make security workflows faster and more reliable.</p>
+      <p>My work spans designing <strong>phishing simulation campaigns</strong>, monitoring network activity via <strong>Grafana</strong> dashboards, managing network security infrastructure, and writing Python and Bash scripts that make security workflows faster and more reliable.</p>
       <p>I'm finishing my <strong>B.S. in Informatics</strong> at Georgian-American University and targeting vulnerability analyst and SOC roles — locally and remotely across Europe.</p>
       <p>Outside of work I train on <strong>HackTheBox</strong> to sharpen offensive security skills and build projects to keep growing.</p>
     </div>
@@ -846,6 +846,11 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
       <div class="pbdy"><p class="pdesc">Multi-service honeypot simulating SSH, HTTP, FTP, and Telnet servers to capture real attacker behavior in real time. Features a live dashboard, GeoIP lookup, threat scoring, credential harvesting, and exportable incident reports.</p>
         <div class="pstk"><span class="stk">Python</span><span class="stk">Flask</span><span class="stk">Raw Sockets</span><span class="stk">SSE</span><span class="stk">GeoIP</span><span class="stk">Threading</span></div>
         <div class="pl">VIEW DETAILS →</div></div></div>
+    <div class="card r d1" data-project="honeytrap" onclick="openModal('honeytrap')"><div class="shimmer"></div>
+      <div class="phead"><div><div class="ptyp">SECURITY / ACTIVE DEFENSE</div><div class="pnm">HoneyTrap</div></div><span class="pb bs">SECURITY</span></div>
+      <div class="pbdy"><p class="pdesc">Multi-service honeypot simulating SSH, HTTP, FTP, and Telnet servers to capture real attacker behavior in real time. Features a live Flask dashboard, GeoIP lookup, automatic threat scoring, credential harvesting, and exportable HTML incident reports.</p>
+        <div class="pstk"><span class="stk">Python</span><span class="stk">Flask</span><span class="stk">Raw Sockets</span><span class="stk">SSE</span><span class="stk">GeoIP</span><span class="stk">Threading</span></div>
+        <div class="pl">VIEW DETAILS →</div></div></div>
   </div>
 </section>
 
@@ -860,7 +865,7 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
       <div><div class="exrl">IT Support Engineer</div>
         <ul class="exbl">
           <li>Design and run end-to-end phishing simulation campaigns using GoPhish with custom HTML/CSS email templates and realistic landing pages</li>
-          <li>Monitor security events via SIEM, triage alerts, and support incident response across Windows, Linux, and macOS</li>
+          <li>Monitor network activity via Grafana dashboards — tracking VPN connections, user sessions, and web traffic across the organization</li>
           <li>Write Python and Bash scripts to automate security monitoring, patch compliance, and user provisioning</li>
           <li>Manage network security infrastructure — VPN, firewalls, DNS/DHCP, MFA, and least-privilege access controls</li>
         </ul></div></div>
@@ -903,6 +908,12 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
       <div class="cert-icon">✦</div>
       <div class="cert-name">ITIL 4 Foundation</div>
       <div class="cert-org">AXELOS / IT SERVICE MGMT</div>
+      <div class="cert-status cert-done">✓ COMPLETED</div>
+    </div>
+    <div class="cert-card r d4">
+      <div class="cert-icon">✦</div>
+      <div class="cert-name">JavaScript & React</div>
+      <div class="cert-org">GEOLAB BOOTCAMP</div>
       <div class="cert-status cert-done">✓ COMPLETED</div>
     </div>
     <div class="cert-card r d5">
