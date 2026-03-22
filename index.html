@@ -235,7 +235,7 @@ section{position:relative;padding:80px 8vw;z-index:1;}
 
 .sh{display:flex;align-items:center;gap:16px;margin-bottom:16px;}
 .so{color:var(--red);font-size:18px;user-select:none;-webkit-user-select:none;}
-.st{font-family:var(--D);font-size:9px;color:var(--gold);letter-spacing:7px;font-weight:600;
+.st{font-family:var(--D);font-size:12px;color:var(--gold);letter-spacing:7px;font-weight:600;
   user-select:none;-webkit-user-select:none;}
 .sline{flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);}
 .sbt{font-family:var(--D);font-size:clamp(28px,3.5vw,48px);color:var(--bone);
@@ -275,11 +275,11 @@ section{position:relative;padding:80px 8vw;z-index:1;}
   transform:scaleX(0);transition:transform .4s;}
 .skcat:hover{border-color:var(--red);transform:translateY(-4px);}
 .skcat:hover::before{transform:scaleX(1);}
-.sktit{font-family:var(--D);font-size:8px;color:var(--gold);letter-spacing:4px;
+.sktit{font-family:var(--D);font-size:11px;color:var(--gold);letter-spacing:4px;
   margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);
   user-select:none;-webkit-user-select:none;}
 .skl{list-style:none;display:flex;flex-wrap:wrap;gap:7px;}
-.skl li{font-family:var(--M);font-size:10px;color:var(--mid);
+.skl li{font-family:var(--M);font-size:12px;color:#c8bfb0;
   background:rgba(248,240,228,.04);border:1px solid rgba(248,240,228,.09);
   padding:4px 10px;letter-spacing:1px;transition:all .25s;position:relative;overflow:hidden;}
 .skl li::before{content:'';position:absolute;inset:0;background:var(--rf);
@@ -449,12 +449,12 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
 .d4{transition-delay:.32s}.d5{transition-delay:.4s}.d6{transition-delay:.48s}
 
 /* OPEN TO WORK BADGE */
-.otw-badge{font-family:var(--M);font-size:8px;color:#4a9a6a;letter-spacing:3px;
-  border:1px solid rgba(74,154,106,.4);padding:4px 10px;
-  display:flex;align-items:center;gap:6px;
+.otw-badge{font-family:var(--M);font-size:15px;color:#4a9a6a;letter-spacing:3px;
+  border:1px solid rgba(74,154,106,.4);padding:6px 14px;
+  display:flex;align-items:center;gap:8px;
   user-select:none;-webkit-user-select:none;}
-.otw-dot{width:6px;height:6px;background:#4a9a6a;border-radius:50%;
-  box-shadow:0 0 8px rgba(74,154,106,.8);animation:otw 2s ease-in-out infinite;}
+.otw-dot{width:8px;height:8px;background:#4a9a6a;border-radius:50%;
+  box-shadow:0 0 10px rgba(74,154,106,.8);animation:otw 2s ease-in-out infinite;}
 @keyframes otw{0%,100%{opacity:1;box-shadow:0 0 8px rgba(74,154,106,.8)}
   50%{opacity:.5;box-shadow:0 0 16px rgba(74,154,106,1)}}
 
@@ -511,7 +511,7 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
   transform:scaleX(0);transition:transform .4s;}
 .skcat:hover{border-color:var(--red);transform:translateY(-4px);}
 .skcat:hover::before{transform:scaleX(1);}
-.sktit{font-family:var(--D);font-size:8px;color:var(--gold);letter-spacing:4px;
+.sktit{font-family:var(--D);font-size:11px;color:var(--gold);letter-spacing:4px;
   margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border);
   user-select:none;-webkit-user-select:none;}
 /* Skill bar items */
@@ -702,7 +702,7 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
     <a href="#about">ABOUT</a><a href="#skills">SKILLS</a>
     <a href="#projects">PROJECTS</a><a href="#experience">EXPERIENCE</a>
     <a href="#certs">CERTS</a><a href="#contact">CONTACT</a>
-    <a href="George_Skhirtladze_CV.pdf" download class="nav-cv">⬇ CV</a>
+    <a href="George_Skhirtladze_CV.pdf" download class="nav-cv">CV</a>
   </div>
   <div class="otw-badge"><span class="otw-dot"></span>OPEN TO WORK</div>
   <div class="hbg" id="hbg" onclick="tNav()"><span></span><span></span><span></span></div>
@@ -946,7 +946,7 @@ function initThree(){
   }
 
   const renderer=new THREE.WebGLRenderer({canvas,antialias:false,alpha:true,powerPreference:'low-power'});
-  renderer.setPixelRatio(1); // always 1, never retina
+  renderer.setPixelRatio(1); 
   renderer.setSize(window.innerWidth,window.innerHeight);
   const scene=new THREE.Scene();
   const camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,.1,1000);
@@ -984,7 +984,7 @@ function initThree(){
   let t=0,last=0;
   (function animate(now){
     requestAnimationFrame(animate);
-    if(now-last<32)return; // ~30fps cap
+    if(now-last<32)return; 
     last=now;t+=.005;
     pts.rotation.y+=.0003;pts.rotation.x+=.0001;
     camera.position.x+=(mx*.5-camera.position.x)*.04;
@@ -1421,7 +1421,7 @@ function openModal(id){
 function closeModal(){
   document.getElementById('modal').classList.remove('show');
   document.body.style.overflow='';
-
+  
   document.querySelectorAll('.card').forEach(c=>{
     c.style.transform='translateY(0) rotateY(0) rotateX(0)';
     c.style.transition='transform .5s cubic-bezier(.25,.46,.45,.94),border-color .4s,box-shadow .4s';
