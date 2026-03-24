@@ -449,7 +449,7 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
 .d4{transition-delay:.32s}.d5{transition-delay:.4s}.d6{transition-delay:.48s}
 
 /* OPEN TO WORK BADGE */
-.otw-badge{font-family:var(--M);font-size:15px;color:#4a9a6a;letter-spacing:3px;
+.otw-badge{font-family:var(--M);font-size:11px;color:#4a9a6a;letter-spacing:3px;
   border:1px solid rgba(74,154,106,.4);padding:6px 14px;
   display:flex;align-items:center;gap:8px;
   user-select:none;-webkit-user-select:none;}
@@ -731,7 +731,7 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
     <div class="hbtns" id="hbtns">
       <a href="#projects" class="btn btn-p">VIEW PROJECTS</a>
       <a href="#contact" class="btn btn-s">GET IN TOUCH</a>
-      <a href="George_Skhirtladze_CV.pdf" download class="btn btn-cv">⬇ DOWNLOAD CV</a>
+      <a href="George_Skhirtladze_CV.pdf" download class="btn btn-cv">DOWNLOAD CV</a>
     </div>
   </div>
   <!-- TERMINAL WIDGET -->
@@ -755,7 +755,7 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
       <p>I'm an IT Support Engineer and security practitioner based in <strong>Tbilisi, Georgia</strong>, with over 3 years of hands-on experience in cybersecurity operations, infrastructure hardening, and security automation.</p>
       <p>My work spans designing <strong>phishing simulation campaigns</strong>, monitoring network activity via <strong>Grafana</strong> dashboards, managing network security infrastructure, and writing Python and Bash scripts that make security workflows faster and more reliable.</p>
       <p>I'm finishing my <strong>B.S. in Informatics</strong> at Georgian-American University and targeting vulnerability analyst and SOC roles — locally and remotely across Europe.</p>
-      <p>Outside of work I train on <strong>HackTheBox</strong> to sharpen offensive security skills and build projects to keep growing.</p>
+      <p>Outside of work I am actively developing offensive security skills through <strong>HackTheBox</strong> and building security projects to keep growing.</p>
     </div>
     <div class="sgrid rr d3">
       <div class="sbox"><div class="snum" id="cnt1">0+</div><div class="slbl">YEARS EXP</div></div>
@@ -775,9 +775,9 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
     <div class="skcat r d2"><div class="sktit">SECURITY & VULNERABILITY</div>
       <ul class="skl"><li><span>Vulnerability Management</span></li><li><span>CVSS v3 Scoring</span></li>
         <li><span>Threat Detection</span></li><li><span>Incident Response</span></li>
-        <li><span>Penetration Testing</span></li><li><span>Phishing Simulation</span></li>
-        <li><span>GoPhish</span></li><li><span>Burp Suite</span></li>
-        <li><span>Nessus</span></li><li><span>Metasploit</span></li></ul></div>
+        <li><span>Penetration Testing (Learning)</span></li><li><span>Phishing Simulation</span></li>
+        <li><span>GoPhish</span></li><li><span>Burp Suite (Learning)</span></li>
+        <li><span>Nessus (Learning)</span></li><li><span>Metasploit (Learning)</span></li></ul></div>
     <div class="skcat r d3"><div class="sktit">SCRIPTING & AUTOMATION</div>
       <ul class="skl"><li><span>Python</span></li><li><span>Bash</span></li>
         <li><span>PowerShell</span></li><li><span>JavaScript</span></li>
@@ -946,13 +946,13 @@ function initThree(){
   }
 
   const renderer=new THREE.WebGLRenderer({canvas,antialias:false,alpha:true,powerPreference:'low-power'});
-  renderer.setPixelRatio(1); 
+  renderer.setPixelRatio(1); // always 1, never retina
   renderer.setSize(window.innerWidth,window.innerHeight);
   const scene=new THREE.Scene();
   const camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,.1,1000);
   camera.position.z=5;
 
-  
+  // Reduce particle count based on screen size
   const count=window.innerWidth>1200?1500:800;
   const geo=new THREE.BufferGeometry();
   const pos=new Float32Array(count*3),cols=new Float32Array(count*3);
@@ -984,7 +984,7 @@ function initThree(){
   let t=0,last=0;
   (function animate(now){
     requestAnimationFrame(animate);
-    if(now-last<32)return; 
+    if(now-last<32)return; // ~30fps cap
     last=now;t+=.005;
     pts.rotation.y+=.0003;pts.rotation.x+=.0001;
     camera.position.x+=(mx*.5-camera.position.x)*.04;
@@ -1274,7 +1274,7 @@ const revObs=new IntersectionObserver(entries=>{
 },{threshold:.08});
 document.querySelectorAll('.r,.rl,.rr').forEach(el=>revObs.observe(el));
 
-// Section title underline
+
 const sbtObs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');sbtObs.unobserve(e.target);}});
 },{threshold:.1});
@@ -1387,7 +1387,7 @@ function openModal(id){
   document.getElementById('m-desc').innerHTML=p.desc;
   document.getElementById('m-gh').href=p.gh;
 
-  
+  // Rebuild imgs container fresh every time to avoid null issues
   const modalBody=document.querySelector('.modal-body');
   let imgEl=document.getElementById('m-imgs');
   if(!imgEl){
