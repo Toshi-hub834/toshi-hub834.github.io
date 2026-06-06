@@ -712,7 +712,7 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
     <a href="#about">ABOUT</a><a href="#skills">SKILLS</a>
     <a href="#projects">PROJECTS</a><a href="#experience">EXPERIENCE</a>
     <a href="#certs">CERTS</a><a href="#contact">CONTACT</a>
-    <a href="George_Skhirtladze_CV.pdf" download class="nav-cv">CV</a>
+    <a href="George Skhirtladze CV.pdf" download class="nav-cv">CV</a>
   </div>
   <div class="otw-badge"><span class="otw-dot"></span>OPEN TO WORK</div>
   <div class="hbg" id="hbg" onclick="tNav()"><span></span><span></span><span></span></div>
@@ -846,6 +846,11 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
       <div class="phead"><div><div class="ptyp">SECURITY / ACTIVE DEFENSE</div><div class="pnm">HoneyTrap</div></div><span class="pb bs">SECURITY</span></div>
       <div class="pbdy"><p class="pdesc">Multi-service honeypot simulating SSH, HTTP, FTP, and Telnet servers to capture real attacker behavior in real time. Features a live dashboard, GeoIP lookup, threat scoring, credential harvesting, and exportable incident reports.</p>
         <div class="pstk"><span class="stk">Python</span><span class="stk">Flask</span><span class="stk">Raw Sockets</span><span class="stk">SSE</span><span class="stk">GeoIP</span><span class="stk">Threading</span></div>
+        <div class="pl">VIEW DETAILS →</div></div></div>
+    <div class="card r d1" data-project="adlab" onclick="openModal('adlab')"><div class="shimmer"></div>
+      <div class="phead"><div><div class="ptyp">OFFENSIVE / DETECTION</div><div class="pnm">AD Purple-Team Lab</div></div><span class="pb bs">SECURITY</span></div>
+      <div class="pbdy"><p class="pdesc">Isolated Active Directory lab where I executed Kerberoasting and AS-REP Roasting from Kali, then engineered custom Wazuh SIEM rules to detect each attack — the full attack-to-detection loop, mapped to MITRE ATT&amp;CK.</p>
+        <div class="pstk"><span class="stk">Active Directory</span><span class="stk">Wazuh</span><span class="stk">Sysmon</span><span class="stk">Kali</span><span class="stk">Impacket</span><span class="stk">MITRE ATT&amp;CK</span></div>
         <div class="pl">VIEW DETAILS →</div></div></div>
   </div>
 </section>
@@ -1387,6 +1392,15 @@ const PROJECTS={
     desc:'Production-quality honeypot built from <strong>raw Python sockets</strong> — no frameworks. Simulates SSH, HTTP, FTP, and Telnet services to lure attackers, logs every connection with <strong>GeoIP intelligence</strong>, scores threats automatically as CRITICAL/HIGH/MEDIUM/LOW based on aggression patterns, and harvests credentials from brute force attempts. The live dashboard streams events via <strong>Server-Sent Events</strong> with attack timeline, top IPs, country breakdown, and one-click HTML incident report generation.',
     feats:['SSH, HTTP, FTP and Telnet honeypot listeners on configurable ports','Real-time attack feed via Server-Sent Events — no page refresh','GeoIP lookup — attacker country, city and ISP via ip-api.com','Automatic threat scoring: CRITICAL / HIGH / MEDIUM / LOW','Credential harvesting — captures every username and password attempt','Telnet shell simulation — logs full command sequences from IoT bots','HTTP scanner detection — flags path traversal, SQLi, XSS, login attempts','One-click exportable HTML incident report with full attack log'],
     stack:['Python','Flask','Raw Sockets','SSE','GeoIP','Threat Intelligence','Threading','JSON Logging']
+  }
+  adlab:{
+    cat:'OFFENSIVE / DETECTION',
+    title:'Active Directory Purple-Team Lab',
+    gh:'https://github.com/Toshi-hub834/active-directory-purple-team-lab',
+    imgs:['assets/adlab-attack.png','assets/adlab-detection.png'],
+    desc:'A self-built, isolated Active Directory lab demonstrating the full <strong>purple-team loop</strong>: attack, telemetry, detection, alert. I deployed a Windows Server 2022 domain controller, a <strong>Wazuh SIEM</strong>, and a Kali attacker, seeded the domain with real-world misconfigurations, executed <strong>Kerberoasting</strong> and <strong>AS-REP Roasting</strong> with Impacket, cracked the captured Kerberos hashes with Hashcat, then authored custom Wazuh detection rules — mapped to <strong>MITRE ATT&CK</strong> — that surface each attack as a high-severity alert.',
+    feats:['Windows Server 2022 domain controller (corp.lab) seeded with deliberate misconfigurations','AS-REP Roasting and Kerberoasting executed with Impacket; hashes cracked offline with Hashcat','Wazuh SIEM with agent + Sysmon shipping enriched telemetry from the domain controller','Custom rules isolating the attack signatures: 4769 + RC4 (Kerberoast), 4768 + pre-auth 0 (AS-REP)','Mapped to MITRE ATT&CK T1558.003 / T1558.004, firing as level-12 alerts','Documented remediation: gMSA, pre-authentication enforcement, ACL hardening'],
+    stack:['Active Directory','Windows Server 2022','Wazuh','Sysmon','Kali','Impacket','Hashcat','MITRE ATT&CK']
   }
 };
 
