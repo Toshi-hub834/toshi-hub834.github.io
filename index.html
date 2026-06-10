@@ -852,6 +852,11 @@ footer{border-top:1px solid var(--border);padding:22px 8vw;
       <div class="pbdy"><p class="pdesc">Isolated Active Directory lab where I executed Kerberoasting and AS-REP Roasting from Kali, then engineered custom Wazuh SIEM rules to detect each attack — the full attack-to-detection loop, mapped to MITRE ATT&amp;CK.</p>
         <div class="pstk"><span class="stk">Active Directory</span><span class="stk">Wazuh</span><span class="stk">Sysmon</span><span class="stk">Kali</span><span class="stk">Impacket</span><span class="stk">MITRE ATT&amp;CK</span></div>
         <div class="pl">VIEW DETAILS →</div></div></div>
+    <div class="card r d1" data-project="webpentest" onclick="openModal('webpentest')"><div class="shimmer"></div>
+  <div class="phead"><div><div class="ptyp">OFFENSIVE / WEB APP</div><div class="pnm">Web App Pentest</div></div><span class="pb bs">SECURITY</span></div>
+  <div class="pbdy"><p class="pdesc">Full black-box penetration test of OWASP Juice Shop against the OWASP Top 10 — SQLi auth bypass, JWT alg:none forgery, IDOR, XSS, and sensitive data exposure — documented in a professional report.</p>
+    <div class="pstk"><span class="stk">Burp Suite</span><span class="stk">OWASP Top 10</span><span class="stk">SQLi</span><span class="stk">JWT</span><span class="stk">XSS</span><span class="stk">IDOR</span></div>
+    <div class="pl">VIEW DETAILS →</div></div></div>
   </div>
 </section>
 
@@ -1317,7 +1322,7 @@ const cntObs=new IntersectionObserver(entries=>{
     if(e.isIntersecting){
       const id=e.target.id;
       if(id==='cnt1')animateCounter(e.target,3,'+');
-      else if(id==='cnt2')animateCounter(e.target,7,'');
+      else if(id==='cnt2')animateCounter(e.target,9,'');
       else if(id==='cnt3')animateCounter(e.target,3,'+');
       cntObs.unobserve(e.target);
     }
@@ -1401,6 +1406,15 @@ const PROJECTS={
     desc:'A self-built, isolated Active Directory lab demonstrating the full <strong>purple-team loop</strong>: attack, telemetry, detection, alert. I deployed a Windows Server 2022 domain controller, a <strong>Wazuh SIEM</strong>, and a Kali attacker, seeded the domain with real-world misconfigurations, executed <strong>Kerberoasting</strong> and <strong>AS-REP Roasting</strong> with Impacket, cracked the captured Kerberos hashes with Hashcat, then authored custom Wazuh detection rules — mapped to <strong>MITRE ATT&CK</strong> — that surface each attack as a high-severity alert.',
     feats:['Windows Server 2022 domain controller (corp.lab) seeded with deliberate misconfigurations','AS-REP Roasting and Kerberoasting executed with Impacket; hashes cracked offline with Hashcat','Wazuh SIEM with agent + Sysmon shipping enriched telemetry from the domain controller','Custom rules isolating the attack signatures: 4769 + RC4 (Kerberoast), 4768 + pre-auth 0 (AS-REP)','Mapped to MITRE ATT&CK T1558.003 / T1558.004, firing as level-12 alerts','Documented remediation: gMSA, pre-authentication enforcement, ACL hardening'],
     stack:['Active Directory','Windows Server 2022','Wazuh','Sysmon','Kali','Impacket','Hashcat','MITRE ATT&CK']
+  },
+  webpentest:{
+    cat:'OFFENSIVE / WEB APPLICATION',
+    title:'Web Application Penetration Test — OWASP Juice Shop',
+    gh:'https://github.com/Toshi-hub834/web-app-pentest-juice-shop',
+    imgs:['assets/webpentest-1.png','assets/webpentest-2.png'],
+    desc:'A full black/grey-box penetration test of <strong>OWASP Juice Shop</strong> against the <strong>OWASP Top 10 (2021)</strong>, documented as a professional pentest report. Manual testing with Burp Suite uncovered five vulnerabilities, including two Critical issues that each allow complete authentication bypass and account takeover.',
+    feats:['SQL injection on the login endpoint bypassing authentication entirely (Critical)','JWT alg:none signature stripping — forged an unsigned token to impersonate any user (Critical)','Insecure Direct Object Reference exposing other users\u2019 shopping baskets (High)','Reflected XSS via the search parameter (Medium)','Sensitive data exposure of a confidential document served to anonymous users (Medium)','Professional report with CVSS v3.1 scoring, CWE mapping, reproduction steps, and remediation'],
+    stack:['Burp Suite','OWASP Top 10','CVSS v3.1','SQL Injection','JWT','XSS','IDOR','Pentest Reporting']
   }
 };
 
